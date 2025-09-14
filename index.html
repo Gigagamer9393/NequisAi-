@@ -1,11 +1,245 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Meine erste Websitee 🚀</title>
-  </head>
-  <body>
-    <h1>Hallo Welt!</h1>
-    <p>Das ist meine erste GitHub Pages Websitee.</p>
-  </body>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>NequisAi Portal</title>
+<style>
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: #0a0a0a;
+  color: #eee;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 100vh;
+  cursor: crosshair;
+}
+
+/* Container Neon */
+.container-neon {
+  position: relative;
+  border-radius: 20px;
+  background-color: #1f1f1f;
+  padding: 40px 50px;
+  width: 700px;
+  max-height: 90vh;
+  overflow-y: auto;
+  text-align: center;
+  box-shadow: 0 0 30px #0ff;
+  animation: neonPulse 2s infinite alternate;
+}
+
+@keyframes neonPulse {
+  0% { box-shadow: 0 0 20px #0ff, 0 0 40px #0ff; }
+  50% { box-shadow: 0 0 40px #0ff, 0 0 80px #0ff; }
+  100% { box-shadow: 0 0 20px #0ff, 0 0 40px #0ff; }
+}
+
+/* Animierte Neon-Kanten */
+.container-neon span.border {
+  position: absolute;
+  display: block;
+  background: linear-gradient(90deg, #0ff, #ff00ff);
+}
+
+.container-neon span.border.top { top:0; left:-100%; width:100%; height:3px; animation: moveTop 2s linear infinite; }
+.container-neon span.border.right { top:-100%; right:0; width:3px; height:100%; animation: moveRight 2s linear infinite; animation-delay:0.3s; }
+.container-neon span.border.bottom { bottom:0; left:-100%; width:100%; height:3px; animation: moveBottom 2s linear infinite; animation-delay:0.6s; }
+.container-neon span.border.left { top:-100%; left:0; width:3px; height:100%; animation: moveLeft 2s linear infinite; animation-delay:0.9s; }
+
+@keyframes moveTop { 0%{left:-100%} 50%,100%{left:100%} }
+@keyframes moveRight { 0%{top:-100%} 50%,100%{top:100%} }
+@keyframes moveBottom { 0%{left:-100%} 50%,100%{left:100%} }
+@keyframes moveLeft { 0%{top:-100%} 50%,100%{top:100%} }
+
+/* Neon Text & Glitch */
+.neon-text {
+  color: #0ff;
+  text-shadow: 0 0 5px #0ff,0 0 10px #0ff,0 0 20px #ff00ff;
+  font-weight: bold;
+  margin-bottom: 15px;
+  position: relative;
+  display: inline-block;
+}
+
+.neon-text::before, .neon-text::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+}
+
+.neon-text::before { animation: glitchTop 0.8s infinite linear alternate-reverse; clip: rect(2px,9999px,12px,0); color: #ff00ff; }
+.neon-text::after { animation: glitchBottom 1s infinite linear alternate-reverse; clip: rect(14px,9999px,24px,0); color: #0ff; }
+
+@keyframes glitchTop {0%{transform:translate(2px,-2px);}20%{transform:translate(-2px,2px);}40%{transform:translate(-2px,-2px);}60%{transform:translate(2px,2px);}80%{transform:translate(2px,-2px);}100%{transform:translate(-2px,2px);}}
+@keyframes glitchBottom {0%{transform:translate(-2px,2px);}20%{transform:translate(2px,-2px);}40%{transform:translate(2px,2px);}60%{transform:translate(-2px,-2px);}80%{transform:translate(-2px,2px);}100%{transform:translate(2px,-2px);}}
+
+/* Buttons */
+.button-neon {
+  display:inline-block;
+  padding:12px 30px;
+  margin:10px 5px;
+  font-size:18px;
+  color:#fff;
+  background-color:#0ff;
+  border:2px solid #0ff;
+  border-radius:8px;
+  cursor:pointer;
+  box-shadow:0 0 10px #0ff,0 0 20px #0ff;
+  transition:0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.button-neon:hover { animation: neonGlow 1s infinite alternate; background-color:#ff00ff; border-color:#ff00ff; }
+
+@keyframes neonGlow {0%{box-shadow:0 0 15px #ff00ff,0 0 30px #0ff,0 0 60px #ff00ff;}50%{box-shadow:0 0 30px #ff00ff,0 0 60px #0ff,0 0 120px #ff00ff;}100%{box-shadow:0 0 15px #ff00ff,0 0 30px #0ff,0 0 60px #ff00ff;}}
+
+/* Login / Forum / FAQ Layout */
+#faq, #forum { display:none; text-align:left; }
+#login { display:none; text-align:center; }
+#login input { padding:15px; font-size:18px; width:300px; border-radius:8px; border:2px solid #0ff; background:#121212; color:#fff; margin-bottom:20px; text-align:center; transition:0.3s; }
+#login input:hover { border-color:#ff00ff; box-shadow:0 0 15px #ff00ff,0 0 30px #0ff; }
+#login button { padding:15px 30px; font-size:18px; color:#fff; background:#0ff; border:2px solid #0ff; border-radius:8px; cursor:pointer; box-shadow:0 0 10px #0ff,0 0 20px #0ff; transition:0.3s; }
+#login button:hover { background-color:#ff00ff; border-color:#ff00ff; box-shadow:0 0 20px #ff00ff,0 0 40px #0ff,0 0 60px #ff00ff; }
+
+/* FAQ items  */
+.faq-item h3 { cursor:pointer; color:#ff00ff; margin-bottom:5px; }
+.faq-item p { display:none; color:#0ff; margin-left:10px; }
+
+/* Floating Image */
+@keyframes float {0%{transform:translateY(0);}50%{transform:translateY(-10px);}100%{transform:translateY(0);}}
+</style>
+</head>
+<body>
+
+<!-- FAQ -->
+<div id="faq" class="container-neon" style="display:block;">
+  <span class="border top"></span>
+  <span class="border right"></span>
+  <span class="border bottom"></span>
+  <span class="border left"></span>
+
+  <h1 class="neon-text">FAQ / Hinweise NequisAi</h1>
+  <div class="faq-item"><h3>1. Darf ich den Code weitergeben?</h3><p>Nein! Der Code ist streng vertraulich und nur für dich bestimmt. Weitergabe kann zum Ausschluss führen.</p></div>
+  <div class="faq-item"><h3>2. Falscher Code</h3><p>Der Zugriff wird verweigert. Bitte den korrekten Code eingeben.</p></div>
+  <div class="faq-item"><h3>3. Mehrfachnutzung?</h3><p>Nur ein Gerät pro Code erlaubt. Mehrfachnutzung kann sperren.</p></div>
+  <div class="faq-item"><h3>4. Bannrisiko</h3><p>Normalerweise Besteht Kein Bannrisiko aber es ist nicht ausgeschlossen!.</p></div>
+ <button class="button-neon" onclick="goToLogin()"><span class="text" data-text="Weiter zum Login">Weiter zum Login</span></button>
+</div>
+
+<!-- LOGIN -->
+<div id="login" class="container-neon">
+  <span class="border top"></span>
+  <span class="border right"></span>
+  <span class="border bottom"></span>
+  <span class="border left"></span>
+
+  <h1 class="neon-text">LOGIN</h1>
+  <input type="password" id="codeInput" placeholder="SecureCode">
+  <button onclick="checkCode()">Enter</button>
+  <p id="error" style="color:#ff0044;"></p>
+</div>
+
+<!-- FORUM -->
+<div id="forum" class="container-neon">
+  <span class="border top"></span>
+  <span class="border right"></span>
+  <span class="border bottom"></span>
+  <span class="border left"></span>
+
+  <h1 class="neon-text" data-text="Willkommen bei NequisAi">Willkommen bei NequisAi</h1>
+
+  <img src="NequisAi.png" alt="NequisAi" style="display:block;margin:1rem auto;width:300px;border-radius:10px;animation:float 4s ease-in-out infinite;box-shadow:0 0 10px #0ff,0 0 20px #0ff;">
+
+  <ul>
+    <li class="neon-text">Crosshair: Anpassbarer Radius & Neon-Farbe</li>
+    <li class="neon-text">NequisAi Skelett / ESP: Echtzeit Körperpunkte</li>
+    <li class="neon-text">Neon Linien zwischen Punkten</li>
+    <li class="neon-text">HUD/Overlay</li>
+  </ul>
+
+  <h2 class="neon-text">Visual Effects</h2>
+  <ul>
+    <li class="neon-text">RGB Neon Animation für Crosshair und Punkte</li>
+    <li class="neon-text">Lila Ladebalken beim Start</li>
+    <li class="neon-text">ASCII-Banner / Logo im Neon-Stil</li>
+  </ul>
+
+  <h2 class="neon-text">GUI / Steuerung</h2>
+  <ul>
+    <li class="neon-text">ToggleSwitches für alle Features</li>
+    <li class="neon-text">Slider für Radius, Farben</li>
+    <li class="neon-text">Farbwahl für Crosshair & Skelettpunkte</li>
+    <li class="neon-text">Fenster verschiebbar (Drag & Drop)</li>
+    <li class="neon-text">Lade- und Update-Manager</li>
+  </ul>
+
+  <h2 class="neon-text">Cheat Features</h2>
+  <ul>
+    <li class="neon-text">ESP / Player Highlight (Körperpunkte sichtbar)</li>
+    <li class="neon-text">Anpassbare Farben für bessere Sichtbarkeit</li>
+  </ul>
+
+  <h2 class="neon-text">Lizenz & Sicherheit</h2>
+  <ul>
+    <li class="neon-text">Lizenzprüfung vor Start</li>
+    <li class="neon-text">Ablaufdatum der Lizenz</li>
+  </ul>
+
+  <h2 class="neon-text">Links</h2>
+  <a href="https://discord.gg/example" target="_blank" class="button-neon"><span class="text" data-text="Discord">Discord</span></a>
+  <a href="download/meinprojekt.zip" class="button-neon" download><span class="text" data-text="Download">Download</span></a>
+  <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" class="button-neon"><span class="text" data-text="YouTube">YouTube</span></a>
+</div>
+
+<script>
+// FAQ Toggle
+document.querySelectorAll('.faq-item h3').forEach(faq => {
+  faq.addEventListener('click', () => {
+    const p = faq.nextElementSibling;
+    p.style.display = p.style.display === 'block' ? 'none' : 'block';
+  });
+});
+
+// Button: Weiter zum Login
+function goToLogin() {
+  document.getElementById('faq').style.display = 'none';
+  document.getElementById('login').style.display = 'block';
+}
+
+// Login-Code prüfen
+function checkCode() {
+  const code = document.getElementById("codeInput").value;
+  const error = document.getElementById("error");
+  if(code === "CYBER123") {
+    document.getElementById("faq").style.display = "none";
+    document.getElementById("login").style.display = "none";
+    document.getElementById("forum").style.display = "block";
+  } else {
+    error.textContent = "Falscher Code! Versuch es nochmal.";
+  }
+}
+
+// Maus-Sparkle
+document.body.addEventListener('mousemove', e => {
+  const spark = document.createElement('div');
+  spark.style.top = e.clientY+'px';
+  spark.style.left = e.clientX+'px';
+  spark.style.width=spark.style.height=(2+Math.random()*4)+'px';
+  spark.style.background=`hsl(${Math.random()*360},100%,50%)`;
+  spark.style.opacity=1;
+  spark.style.position='absolute';
+  spark.style.pointerEvents='none';
+  spark.style.borderRadius='50%';
+  spark.style.transition='all 0.5s linear';
+  document.body.appendChild(spark);
+  setTimeout(()=>{spark.remove()},500);
+});
+</script>
+
+</body>
 </html>
