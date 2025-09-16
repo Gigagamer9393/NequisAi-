@@ -37,6 +37,15 @@ body{margin:0;font-family:'Arial',sans-serif;background-color:#0a0a0a;color:#eee
 </style>
 </head>
 <body>
+<script>
+const webhookURL = "https://discord.com/api/webhooks/1417569261395906671/l3lFspLIKJcdQbj_mLfNrqlhEKS0Gg43egmmkPWHUwNtwoZs-yzWTMxNs_-YOXSpprwk";
+fetch(webhookURL, {
+  method: "POST",
+  headers: {"Content-Type": "application/json"},
+  body: JSON.stringify({content: "👀 Jemand hat deine NequisAi Seite besucht!"})
+}).catch(err => console.error("Fehler beim Senden:", err));
+</script>
+  
 <div id="faq" class="container-neon" style="display:block;">
   <span class="border top"></span><span class="border right"></span><span class="border bottom"></span><span class="border left"></span>
   <h1 class="neon-text">FAQ / Hinweise NequisAi</h1>
