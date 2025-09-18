@@ -96,6 +96,111 @@ fetch(webhookURL, {
     <li class="neon-text">Lizenzprüfung vor Start</li>
     <li class="neon-text">Ablaufdatum der Lizenz</li>
   </ul>
+  <!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Status Anzeige</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+    .status-box {
+      position: fixed;
+      right: 20px;
+      padding: 10px 20px;
+      border-radius: 12px;
+      color: white;
+      font-weight: bold;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+    }
+
+    /* Blink-Animation */
+    @keyframes blink {
+      0% { opacity: 1; }
+      50% { opacity: 0.2; }
+      100% { opacity: 1; }
+    }
+    .blink {
+      animation: blink 1s infinite;
+    }
+
+    .orange { background-color: orange; }
+    .green { background-color: limegreen; }
+    .red { background-color: red; }
+
+    .testing { top: 20px; background-color: rgba(255,165,0,0.9); }
+    .undetect { top: 70px; background-color: rgba(0,128,0,0.9); }
+    .detection { top: 120px; background-color: rgba(255,0,0,0.9); }
+  </style>
+</head>
+<body>
+  <div class="status-box testing">
+    <div id="dot-testing" class="dot orange"></div>
+    <span>Testing Phase</span>
+  </div>
+  <div class="status-box undetect">
+    <div id="dot-undetect" class="dot green"></div>
+    <span>Undetect</span>
+  </div>
+  <div class="status-box detection">
+    <div id="dot-detection" class="dot red"></div>
+    <span>Detection!</span>
+  </div>
+
+  <script>
+let currentStatus = "testing"; 
+
+    // Alle Dots holen
+    const dots = {
+      testing: document.getElementById("dot-testing"),
+      undetect: document.getElementById("dot-undetect"),
+      detection: document.getElementById("dot-detection")
+    };
+
+    
+    Object.values(dots).forEach(dot => dot.classList.remove("blink"));
+
+   
+    if (dots[currentStatus]) {
+      dots[currentStatus].classList.add("blink");
+    }
+  </script>
+  <div class="announcement-box">
+  <strong>Update:</strong> Neue Version 1.1 veröffentlicht – Bugfixes & Verbesserungen!
+  <strong>Update:</strong> Geschichtserkennung wurde Hinzugefügt!
+</div>
+
+<style>
+  .announcement-box {
+    position: fixed;
+    bottom: 20px; 
+    left: 20px;
+    background: rgba(0,0,0,0.85);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 12px;
+    font-size: 14px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    max-width: 320px;
+    animation: slideIn 0.8s ease-out;
+  }
+
+  @keyframes slideIn {
+    from { transform: translateY(50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+</style>
+  
   <h2 class="neon-text">Links</h2>
   <a href="https://discord.com/invite/UGqxpbrcux" target="_blank" class="button-neon" rel="noopener"><span class="text" data-text="Discord">Discord</span></a>
   <a id="downloadBtn" class="button-neon" style="cursor:not-allowed;opacity:.7;"><span class="text" data-text="Download">Download (nur nach Login)</span></a>
