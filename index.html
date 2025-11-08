@@ -212,7 +212,7 @@ document.querySelectorAll('.faq-item h3').forEach(faq=>{faq.addEventListener('cl
 function goToLogin(){document.getElementById('faq').style.display='none';document.getElementById('login').style.display='block'}
 async function sha256(message){const msgBuffer=new TextEncoder().encode(message);const hashBuffer=await crypto.subtle.digest("SHA-256",msgBuffer);const hashArray=Array.from(new Uint8Array(hashBuffer));const hashHex=hashArray.map(b=>b.toString(16).padStart(2,"0")).join("");return hashHex}
 const correctHash="c3ba181459b31dbe9ebec3873816271f300dc042cb20b45d07775a4a56f4a6f7";
-const downloadUrl="https://os5.mycloud.com/action/share/a18b2adb-d5b9-4048-97b7-3eb2744356c9";
+const downloadUrl="https://os5.mycloud.com/action/share/5c1f5acc-758d-4e9f-9795-936da68804ca";
 const downloadFilename="meinprojekt.zip";
 async function checkCode(){const code=document.getElementById("codeInput").value||"";const error=document.getElementById("error");error.textContent="";try{const inputHash=await sha256(code);if(inputHash===correctHash){document.getElementById("faq").style.display="none";document.getElementById("login").style.display="none";document.getElementById("forum").style.display="block";revealDownload()}else{error.textContent="Falscher Code! Versuch es nochmal."}}catch(e){console.error(e);error.textContent="Fehler beim Prüfen des Codes."}}
 function revealDownload(){const btn=document.getElementById("downloadBtn");if(!btn.getAttribute("data-ready")){const a=document.createElement("a");a.href=downloadUrl;a.setAttribute("download",downloadFilename);a.target="_blank";a.rel="noopener";a.className="button-neon";a.innerHTML='<span class="text" data-text="Download">Download</span>';btn.parentNode.replaceChild(a,btn);a.focus()}}
